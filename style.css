@@ -15,12 +15,12 @@ body {
     background-color: #1b2838; /* Calculator body */
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
-    overflow-y: hidden; /* Prevent internal scrolling as it should auto-scale */
+    overflow-y: auto; /* Re-introduce internal scrolling if content is too tall */
     width: clamp(280px, 90vw, 320px); /* Responsive width */
-    height: calc(100% - 30px); /* Fill available height, accounting for padding */
+    height: 100%; /* Fill available height within its flex container */
     max-height: 95vh; /* Limit height to prevent overflow on small screens */
     display: grid;
-    grid-template-rows: auto 1fr; /* Display takes auto height, buttons take remaining */
+    grid-template-rows: max-content 1fr; /* Display takes only necessary height, buttons take remaining */
     padding: clamp(10px, 2vh, 15px); /* Responsive padding */
     transition: width 0.4s ease-in-out;
 }
@@ -47,7 +47,7 @@ body {
 .display .expression {
     font-size: clamp(0.7em, 2.5vh, 0.9em); /* Responsive font size */
     color: rgba(255, 255, 255, 0.6);
-    min-height: 25px;
+    /* min-height: 25px; Removed for flexibility */
     opacity: 0.8;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
@@ -180,16 +180,37 @@ button[data-action="delete"]:hover {
 }
 
 @media (max-width: 480px) {
+    .calculator {
+        padding: clamp(5px, 1vh, 10px); /* Tighter padding for very small screens */
+    }
     .calculator.scientific-mode .buttons {
-        gap: 5px; /* Even smaller gap in scientific mode */
+        gap: 4px; /* Even smaller gap in scientific mode */
     }
     .calculator.scientific-mode button {
-        font-size: clamp(0.7em, 3vw, 1.0em); /* More aggressive font scaling */
+        font-size: clamp(0.6em, 2.5vw, 0.9em); /* More aggressive font scaling, but readable */
     }
     .calculator.scientific-mode .display .expression {
-        font-size: clamp(0.6em, 2vh, 0.8em);
+        font-size: clamp(0.5em, 1.5vh, 0.7em);
     }
     .calculator.scientific-mode .display .result {
-        font-size: clamp(1.4em, 5vh, 2.0em);
+        font-size: clamp(1.2em, 3.5vh, 1.8em);
+    }
+    /* Add specific adjustments for very short screens in scientific mode */
+    @media (max-height: 600px) {
+        .calculator.scientific-mode {
+            padding: clamp(3px, 0.5vh, 5px);
+        }
+        .calculator.scientific-mode .buttons {
+            gap: 3px;
+        }
+        .calculator.scientific-mode button {
+            font-size: clamp(0.5em, 2vw, 0.8em);
+        }
+        .calculator.scientific-mode .display .expression {
+            font-size: clamp(0.4em, 1.2vh, 0.6em);
+        }
+        .calculator.scientific-mode .display .result {
+            font-size: clamp(1.0em, 3vh, 1.5em);
+        }
     }
 }
