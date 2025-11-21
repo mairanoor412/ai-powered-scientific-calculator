@@ -18,7 +18,7 @@ body {
     overflow-y: hidden; /* Strictly no internal scrolling */
     width: clamp(280px, 90vw, 320px); /* Responsive width */
     height: 100%; /* Fill available height within its flex container */
-    max-height: 95vh; /* Limit height to prevent overflow on small screens */
+    max-height: 92vh; /* Limit height to prevent overflow on small screens */
     display: grid;
     grid-template-rows: 0.18fr 1fr; /* Prioritize buttons - display takes 18% of available fractional space */
     padding: clamp(10px, 2vh, 15px); /* Responsive padding */
@@ -45,7 +45,7 @@ body {
 }
 
 .display .expression {
-    font-size: clamp(0.7em, 2.5vh, 0.9em); /* Responsive font size */
+    font-size: clamp(0.8em, 3vh, 1.0em); /* Professional and readable font size */
     color: rgba(255, 255, 255, 0.6);
     /* min-height: 25px; Removed for flexibility */
     opacity: 0.8;
@@ -68,7 +68,7 @@ body {
 }
 
 .display .result {
-    font-size: clamp(1.8em, 6vh, 2.8em); /* Responsive font size */
+    font-size: clamp(2.0em, 7vh, 3.0em); /* Professional and readable font size */
     color: #FFFFFF;
     white-space: nowrap;
     overflow: hidden;
@@ -77,7 +77,6 @@ body {
     font-weight: 300;
     transition: font-size 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
-
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -96,7 +95,7 @@ button {
     display: flex; /* Use flex to center content */
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.7em, 3.5vh, 1.3em); /* More aggressive font size scaling using vh */
+    font-size: clamp(0.85em, 3.8vh, 1.4em); /* Adjusted for better consistency */
     color: #FFFFFF;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
@@ -187,13 +186,13 @@ button[data-action="delete"]:hover {
         gap: 3px; /* Extremely small gap in scientific mode */
     }
     .calculator.scientific-mode button {
-        font-size: clamp(0.5em, 2vw, 0.8em); /* Even more aggressive font scaling */
+        font-size: clamp(0.65em, 2.8vw, 1.0em); /* Adjusted aggressive font scaling */
     }
     .calculator.scientific-mode .display .expression {
-        font-size: clamp(0.4em, 1.0vh, 0.6em);
+        font-size: clamp(0.5em, 1.5vh, 0.8em);
     }
     .calculator.scientific-mode .display .result {
-        font-size: clamp(1.0em, 3.0vh, 1.6em);
+        font-size: clamp(1.2em, 4vh, 2.0em);
     }
     /* Specific adjustments for very short screens (e.g., small phones in landscape/portrait) */
     @media (max-height: 600px) {
@@ -204,13 +203,13 @@ button[data-action="delete"]:hover {
             gap: 2px;
         }
         .calculator.scientific-mode button {
-            font-size: clamp(0.4em, 1.5vw, 0.7em);
+            font-size: clamp(0.55em, 2.2vw, 0.9em); /* Adjusted aggressive font scaling */
         }
         .calculator.scientific-mode .display .expression {
-            font-size: clamp(0.3em, 0.8vh, 0.5em);
+            font-size: clamp(0.4em, 1.2vh, 0.7em);
         }
         .calculator.scientific-mode .display .result {
-            font-size: clamp(0.8em, 2.5vh, 1.2em);
+            font-size: clamp(1.0em, 3vh, 1.5em);
         }
     }
 }
