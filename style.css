@@ -20,8 +20,8 @@ body {
     height: calc(100% - 30px); /* Fill available height, accounting for padding */
     max-height: 95vh; /* Limit height to prevent overflow on small screens */
     display: grid;
-    grid-template-rows: 0.25fr 1fr; /* Proportional height distribution for display and buttons */
-    padding: 15px; /* Reduced padding */
+    grid-template-rows: auto 1fr; /* Display takes auto height, buttons take remaining */
+    padding: clamp(10px, 2vh, 15px); /* Responsive padding */
     transition: width 0.4s ease-in-out;
 }
 
@@ -32,7 +32,7 @@ body {
 .display {
     background-color: #161D26; /* Clean dark tone */
     border-radius: 12px;
-    padding: 10px; /* Reduced padding for more space */
+    padding: clamp(8px, 2vh, 10px); /* Responsive padding */
     text-align: right;
     height: auto; /* Allow height to adjust based on grid-template-rows */
     display: flex;
@@ -40,7 +40,7 @@ body {
     justify-content: space-around;
     word-wrap: break-word;
     word-break: break-all;
-    margin-bottom: 15px; /* Reduced margin */
+    margin-bottom: clamp(10px, 1.5vh, 15px); /* Responsive margin */
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9); /* Deeper inner shadow */
 }
 
@@ -179,4 +179,17 @@ button[data-action="delete"]:hover {
     transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s 0s; /* visibility changes instantly when showing */
 }
 
-
+@media (max-width: 480px) {
+    .calculator.scientific-mode .buttons {
+        gap: 5px; /* Even smaller gap in scientific mode */
+    }
+    .calculator.scientific-mode button {
+        font-size: clamp(0.7em, 3vw, 1.0em); /* More aggressive font scaling */
+    }
+    .calculator.scientific-mode .display .expression {
+        font-size: clamp(0.6em, 2vh, 0.8em);
+    }
+    .calculator.scientific-mode .display .result {
+        font-size: clamp(1.4em, 5vh, 2.0em);
+    }
+}
