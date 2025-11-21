@@ -15,12 +15,12 @@ body {
     background-color: #1b2838; /* Calculator body */
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
-    overflow-y: auto; /* Re-introduce internal scrolling if content is too tall */
+    overflow-y: hidden; /* Strictly no internal scrolling */
     width: clamp(280px, 90vw, 320px); /* Responsive width */
     height: 100%; /* Fill available height within its flex container */
     max-height: 95vh; /* Limit height to prevent overflow on small screens */
     display: grid;
-    grid-template-rows: max-content 1fr; /* Display takes only necessary height, buttons take remaining */
+    grid-template-rows: 0.18fr 1fr; /* Prioritize buttons - display takes 18% of available fractional space */
     padding: clamp(10px, 2vh, 15px); /* Responsive padding */
     transition: width 0.4s ease-in-out;
 }
@@ -32,7 +32,7 @@ body {
 .display {
     background-color: #161D26; /* Clean dark tone */
     border-radius: 12px;
-    padding: clamp(8px, 2vh, 10px); /* Responsive padding */
+    padding: clamp(5px, 1.5vh, 10px); /* More aggressive responsive padding */
     text-align: right;
     height: auto; /* Allow height to adjust based on grid-template-rows */
     display: flex;
@@ -40,7 +40,7 @@ body {
     justify-content: space-around;
     word-wrap: break-word;
     word-break: break-all;
-    margin-bottom: clamp(10px, 1.5vh, 15px); /* Responsive margin */
+    margin-bottom: clamp(8px, 1vh, 15px); /* More aggressive responsive margin */
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9); /* Deeper inner shadow */
 }
 
@@ -96,7 +96,7 @@ button {
     display: flex; /* Use flex to center content */
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.8em, 3.5vw, 1.3em); /* Responsive font size */
+    font-size: clamp(0.7em, 3.5vh, 1.3em); /* More aggressive font size scaling using vh */
     color: #FFFFFF;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
@@ -181,36 +181,36 @@ button[data-action="delete"]:hover {
 
 @media (max-width: 480px) {
     .calculator {
-        padding: clamp(5px, 1vh, 10px); /* Tighter padding for very small screens */
+        padding: clamp(3px, 0.8vh, 8px); /* Very tight padding for small screens */
     }
     .calculator.scientific-mode .buttons {
-        gap: 4px; /* Even smaller gap in scientific mode */
+        gap: 3px; /* Extremely small gap in scientific mode */
     }
     .calculator.scientific-mode button {
-        font-size: clamp(0.6em, 2.5vw, 0.9em); /* More aggressive font scaling, but readable */
+        font-size: clamp(0.5em, 2vw, 0.8em); /* Even more aggressive font scaling */
     }
     .calculator.scientific-mode .display .expression {
-        font-size: clamp(0.5em, 1.5vh, 0.7em);
+        font-size: clamp(0.4em, 1.0vh, 0.6em);
     }
     .calculator.scientific-mode .display .result {
-        font-size: clamp(1.2em, 3.5vh, 1.8em);
+        font-size: clamp(1.0em, 3.0vh, 1.6em);
     }
-    /* Add specific adjustments for very short screens in scientific mode */
+    /* Specific adjustments for very short screens (e.g., small phones in landscape/portrait) */
     @media (max-height: 600px) {
         .calculator.scientific-mode {
-            padding: clamp(3px, 0.5vh, 5px);
+            padding: clamp(2px, 0.4vh, 4px);
         }
         .calculator.scientific-mode .buttons {
-            gap: 3px;
+            gap: 2px;
         }
         .calculator.scientific-mode button {
-            font-size: clamp(0.5em, 2vw, 0.8em);
+            font-size: clamp(0.4em, 1.5vw, 0.7em);
         }
         .calculator.scientific-mode .display .expression {
-            font-size: clamp(0.4em, 1.2vh, 0.6em);
+            font-size: clamp(0.3em, 0.8vh, 0.5em);
         }
         .calculator.scientific-mode .display .result {
-            font-size: clamp(1.0em, 3vh, 1.5em);
+            font-size: clamp(0.8em, 2.5vh, 1.2em);
         }
     }
 }
