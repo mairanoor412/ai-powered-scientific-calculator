@@ -42,6 +42,7 @@ body {
     word-break: break-all;
     margin-bottom: clamp(8px, 1vh, 15px); /* More aggressive responsive margin */
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9); /* Deeper inner shadow */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .display .expression {
