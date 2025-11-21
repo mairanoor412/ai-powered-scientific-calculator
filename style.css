@@ -180,7 +180,8 @@ button[data-action="delete"]:hover {
 
 @media (max-width: 480px) {
     .calculator {
-        padding: clamp(3px, 0.8vh, 8px); /* Very tight padding for small screens */
+        max-height: 75vh; /* Further reduced height for small screens */
+        padding: clamp(2px, 0.5vh, 6px); /* Very tight padding for small screens */
     }
     .calculator.scientific-mode .buttons {
         gap: 3px; /* Extremely small gap in scientific mode */
@@ -188,11 +189,15 @@ button[data-action="delete"]:hover {
     .calculator.scientific-mode button {
         font-size: clamp(0.6em, 2.5vw, 0.9em); /* Adjusted aggressive font scaling */
     }
-    .calculator.scientific-mode .display .expression {
-        font-size: clamp(0.5em, 1.5vh, 0.8em);
+    .display {
+        padding: clamp(3px, 1vh, 8px); /* Tighter display padding for small screens */
+        margin-bottom: clamp(5px, 0.7vh, 10px); /* Smaller gap between display and buttons */
     }
-    .calculator.scientific-mode .display .result {
-        font-size: clamp(1.2em, 4vh, 2.0em);
+    .display .expression {
+        font-size: clamp(0.6em, 2vh, 0.9em); /* Further reduced for small screens */
+    }
+    .display .result {
+        font-size: clamp(1.8em, 6vh, 2.8em); /* Further reduced for small screens */
     }
     /* Specific adjustments for very short screens (e.g., small phones in landscape/portrait) */
     @media (max-height: 600px) {
