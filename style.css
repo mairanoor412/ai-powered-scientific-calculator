@@ -1,0 +1,213 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1C1C1E; /* iOS dark */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #FFFFFF; /* Clean white text */
+    overflow: hidden;
+}
+
+.calculator {
+    background-color: #1b2838; /* Calculator body */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    width: 320px;
+    min-width: 300px;
+    max-width: 95vw;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 20px;
+    transition: width 0.4s ease-in-out;
+}
+
+.calculator.scientific-mode {
+    width: 450px;
+}
+
+.display {
+    background-color: #161D26; /* Clean dark tone */
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: right;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9); /* Deeper inner shadow */
+}
+
+.display .expression {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.6);
+    min-height: 25px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.display .expression.deleting {
+    animation: fadeSlideLeft 0.15s ease-out forwards; /* 150ms duration, keep final state */
+}
+
+@keyframes fadeSlideLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-10px); /* Slide left by 10px */
+    }
+}
+
+.display .result {
+    font-size: 2.8em;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.02em;
+    font-weight: 300;
+    transition: font-size 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.calculator.scientific-mode .buttons {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+button {
+    background-color: #505050; /* Mid grey number buttons */
+    border: none;
+    border-radius: 12px;
+    padding: 18px 10px;
+    font-size: 1.3em;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    outline: none;
+    user-select: none; /* Prevent text selection on rapid clicks */
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02); /* Slight lift and scale-in */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45); /* Soft shadow on hover */
+    background-color: #6a6a6a; /* Slightly lighter grey on hover */
+}
+
+button:active {
+    transform: translateY(1px) scale(0.96); /* Quick press-down */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #3b3b3b; /* Darker grey on active */
+}
+
+/* Specific styling for operators */
+button[data-operator],
+button[data-action="equals"] {
+    background-color: #FF9500; /* Soft orange operator buttons */
+    color: #FFFFFF;
+}
+
+button[data-operator]:hover,
+button[data-action="equals"]:hover {
+    background-color: #ffb86b; /* Lighter soft orange on hover */
+}
+
+/* Special action buttons (AC, DEL) */
+button[data-action="clear"],
+button[data-action="delete"] {
+    background-color: #D4D4D4; /* Light grey */
+    color: #000000; /* Black text for contrast */
+}
+
+button[data-action="clear"]:hover,
+button[data-action="delete"]:hover {
+    background-color: #e6e6e6; /* Lighter grey on hover */
+}
+
+/* Scientific toggle button */
+.toggle-scientific {
+    background-color: #D4D4D4 !important; /* Light grey */
+    color: #000000; /* Black text for contrast */
+    font-weight: bold;
+}
+
+.toggle-scientific:hover {
+    background-color: #e6e6e6 !important; /* Lighter grey on hover */
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.scientific-btn {
+    visibility: hidden; /* Hide without removing from layout immediately */
+    pointer-events: none; /* Make hidden buttons unclickable */
+    background-color: #D4D4D4; /* Light grey */
+    color: #000000; /* Black text for contrast */
+    font-size: 1.0em; /* Slightly reduced for visual balance */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out; /* Smooth transition for sci buttons */
+}
+
+.scientific-btn:hover {
+    background-color: #e6e6e6; /* Lighter grey on hover */
+}
+
+.calculator.scientific-mode .scientific-btn {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .calculator {
+        width: 100%;
+        border-radius: 0;
+        padding: 10px;
+        min-width: unset;
+    }
+    .calculator.scientific-mode {
+        width: 100%;
+    }
+    .display {
+        min-height: 90px;
+        padding: 20px 15px;
+    }
+    .display .current-operand {
+        font-size: 2.2em;
+    }
+    button {
+        padding: 12px 5px;
+        font-size: 1.1em;
+        border-radius: 8px;
+    }
+    .buttons {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 320px) {
+    button {
+        font-size: 1em;
+        padding: 10px 3px;
+    }
+    .display .current-operand {
+        font-size: 1.8em;
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="expression" id="expression-display"></div>
+            <div class="result" id="result-display">0</div>
+        </div>
+        <div class="buttons">
+            <!-- Toggle for Scientific Functions -->
+            <button class="toggle-scientific" data-action="toggleScientific">Sci</button>
+
+            <!-- Basic Buttons -->
+            <button data-action="clear">C</button>
+            <button data-action="delete">DEL</button>
+            <button data-operator="%">%</button>
+            <button data-operator="÷">÷</button>
+
+            <button data-number>7</button>
+            <button data-number>8</button>
+            <button data-number>9</button>
+            <button data-operator="*">*</button>
+
+            <button data-number>4</button>
+            <button data-number>5</button>
+            <button data-number>6</button>
+            <button data-operator="-">-</button>
+
+            <button data-number>1</button>
+            <button data-number>2</button>
+            <button data-number>3</button>
+            <button data-operator="+">+</button>
+
+            <button data-number>0</button>
+            <button data-number>.</button>
+            <button data-action="equals" class="span-two">=</button>
+
+            <!-- Scientific Buttons (initially hidden) -->
+            <button class="scientific-btn" data-operator="sin">sin</button>
+            <button class="scientific-btn" data-operator="cos">cos</button>
+            <button class="scientific-btn" data-operator="tan">tan</button>
+            <button class="scientific-btn" data-operator="log">log</button>
+            <button class="scientific-btn" data-operator="ln">ln</button>
+            <button class="scientific-btn" data-operator="x^2">x²</button>
+            <button class="scientific-btn" data-operator="x^3">x³</button>
+            <button class="scientific-btn" data-operator="sqrt">√</button>
+            <button class="scientific-btn" data-operator="^">x^y</button>
+            <button class="scientific-btn" data-operator="exp">exp</button>
+            <button class="scientific-btn" data-operator="pi">π</button>
+            <button class="scientific-btn" data-operator="e">e</button>
+            <button class="scientific-btn" data-operator="(">(</button>
+            <button class="scientific-btn" data-operator=")">)</button>
+            <button class="scientific-btn" data-operator="!">x!</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
