@@ -150,7 +150,8 @@ class Calculator {
     toggleScientificMode() {
         this.scientificMode = !this.scientificMode;
         document.querySelector('.calculator').classList.toggle('scientific-mode', this.scientificMode);
-        this.adjustFontSize(); // Adjust font size after layout change
+        this._adjustDisplayFontSize(this.expressionDisplay); // Adjust font size after layout change
+        this._adjustDisplayFontSize(this.resultDisplay); // Adjust font size after layout change
     }
 
     autoCalculate() {
@@ -289,7 +290,8 @@ class Calculator {
         } else {
             this.resultDisplay.innerText = this.currentResult || ''; // Show currentResult or empty if it's being built
         }
-        this.adjustFontSize();
+        this._adjustDisplayFontSize(this.expressionDisplay);
+        this._adjustDisplayFontSize(this.resultDisplay);
     }
 
     calculate() {
@@ -309,14 +311,28 @@ class Calculator {
         this.updateDisplay();
     }
 
-    adjustFontSize() {
-        const display = this.resultDisplay;
-        let fontSize = 2.8; // Initial font size in em
-        display.style.fontSize = `${fontSize}em`;
+    _adjustDisplayFontSize(displayElement) {
+        // Reset font size to default/max before measuring to ensure accurate recalculation
+        displayElement.style.fontSize = ''; 
 
-        while (display.scrollWidth > display.clientWidth && fontSize > 1.0) {
-            fontSize -= 0.1;
-            display.style.fontSize = `${fontSize}em`;
+        // Get the initial computed font size (from CSS) to use as the maximum
+        let currentFontSize = parseFloat(window.getComputedStyle(displayElement).fontSize);
+        const initialRemSize = currentFontSize / parseFloat(window.getComputedStyle(document.documentElement).fontSize); // Convert px to rem for min check
+
+        const minFontSizeRem = 0.7; // Minimum readable font size in rem
+
+        // Loop to scale down until text fits or minFontSize is reached
+        // Use a small factor for smooth, gradual scaling
+        while (displayElement.scrollWidth > displayElement.clientWidth && initialRemSize > minFontSizeRem) {
+            currentFontSize -= 1; // Decrement by 1px
+            displayElement.style.fontSize = `${currentFontSize}px`;
+
+            // Re-evaluate current rem size to check against minFontSizeRem
+            const newRemSize = currentFontSize / parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+            if (newRemSize <= minFontSizeRem) {
+                displayElement.style.fontSize = `${minFontSizeRem}rem`;
+                break;
+            }
         }
     }
 }
