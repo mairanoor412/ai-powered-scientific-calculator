@@ -111,9 +111,10 @@ button:hover {
 }
 
 button:active {
-    transform: translateY(1px) scale(0.96); /* Quick press-down */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(0.5px) scale(0.98); /* Slightly less dramatic but smoother press-down */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     background-color: #3b3b3b; /* Darker grey on active */
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.1s ease-out; /* Smoother, quicker transition */
 }
 
 /* Specific styling for operators */
