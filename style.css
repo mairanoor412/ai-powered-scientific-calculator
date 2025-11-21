@@ -4,47 +4,48 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    height: 100vh; /* Ensure body takes full viewport height */
     background: #1C1C1E; /* iOS dark */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #FFFFFF; /* Clean white text */
-    overflow: hidden;
+    overflow: hidden; /* Prevent body scroll, but calculator can scroll internally */
 }
 
 .calculator {
     background-color: #1b2838; /* Calculator body */
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-    width: 320px;
-    min-width: 300px;
-    max-width: 95vw;
+    overflow-y: hidden; /* Prevent internal scrolling as it should auto-scale */
+    width: clamp(280px, 90vw, 320px); /* Responsive width */
+    height: calc(100% - 30px); /* Fill available height, accounting for padding */
+    max-height: 95vh; /* Limit height to prevent overflow on small screens */
     display: grid;
-    grid-template-rows: auto 1fr;
-    padding: 20px;
+    grid-template-rows: 0.25fr 1fr; /* Proportional height distribution for display and buttons */
+    padding: 15px; /* Reduced padding */
     transition: width 0.4s ease-in-out;
 }
 
 .calculator.scientific-mode {
-    width: 450px;
+    width: clamp(380px, 90vw, 450px); /* Responsive width for scientific mode */
 }
 
 .display {
     background-color: #161D26; /* Clean dark tone */
     border-radius: 12px;
-    padding: 25px 20px;
+    padding: 10px; /* Reduced padding for more space */
     text-align: right;
-    min-height: 110px;
+    height: auto; /* Allow height to adjust based on grid-template-rows */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     word-wrap: break-word;
     word-break: break-all;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced margin */
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9); /* Deeper inner shadow */
 }
 
 .display .expression {
-    font-size: 0.9em;
+    font-size: clamp(0.7em, 2.5vh, 0.9em); /* Responsive font size */
     color: rgba(255, 255, 255, 0.6);
     min-height: 25px;
     opacity: 0.8;
@@ -67,7 +68,7 @@ body {
 }
 
 .display .result {
-    font-size: 2.8em;
+    font-size: clamp(1.8em, 6vh, 2.8em); /* Responsive font size */
     color: #FFFFFF;
     white-space: nowrap;
     overflow: hidden;
@@ -80,7 +81,8 @@ body {
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    grid-auto-rows: 1fr; /* Make button rows take equal height */
+    gap: 10px; /* Consistent gap */
 }
 
 .calculator.scientific-mode .buttons {
@@ -90,9 +92,11 @@ body {
 button {
     background-color: #505050; /* Mid grey number buttons */
     border: none;
-    border-radius: 12px;
-    padding: 18px 10px;
-    font-size: 1.3em;
+    border-radius: 10%; /* More circular as height changes */
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.8em, 3.5vw, 1.3em); /* Responsive font size */
     color: #FFFFFF;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
@@ -160,7 +164,7 @@ button[data-action="delete"]:hover {
     font-size: 1.0em; /* Slightly reduced for visual balance */
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out; /* Smooth transition for sci buttons */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s 0.3s; /* visibility changes only after other animations for hiding */
 }
 
 .scientific-btn:hover {
@@ -172,42 +176,7 @@ button[data-action="delete"]:hover {
     pointer-events: auto;
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s 0s; /* visibility changes instantly when showing */
 }
 
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    .calculator {
-        width: 100%;
-        border-radius: 0;
-        padding: 10px;
-        min-width: unset;
-    }
-    .calculator.scientific-mode {
-        width: 100%;
-    }
-    .display {
-        min-height: 90px;
-        padding: 20px 15px;
-    }
-    .display .current-operand {
-        font-size: 2.2em;
-    }
-    button {
-        padding: 12px 5px;
-        font-size: 1.1em;
-        border-radius: 8px;
-    }
-    .buttons {
-        gap: 8px;
-    }
-}
 
-@media (max-width: 320px) {
-    button {
-        font-size: 1em;
-        padding: 10px 3px;
-    }
-    .display .current-operand {
-        font-size: 1.8em;
-    }
-}
