@@ -20,7 +20,7 @@ body {
     height: 100%; /* Fill available height within its flex container */
     max-height: 80vh; /* Limit height to prevent overflow on small screens */
     display: grid;
-    grid-template-rows: 0.18fr 1fr; /* Prioritize buttons - display takes 18% of available fractional space */
+    grid-template-rows: 0.25fr 1fr; /* Prioritize buttons - display takes 25% of available fractional space */
     padding: clamp(10px, 2vh, 15px); /* Responsive padding */
     transition: width 0.4s ease-in-out;
 }
@@ -71,8 +71,7 @@ body {
 .display .result {
     font-size: clamp(1.5em, 5vh, 2.5em); /* Reduced for better visibility of long numbers */
     color: #FFFFFF;
-    white-space: normal; /* Allow numbers to wrap to multiple lines */
-    overflow: hidden; /* Keep overflow hidden for now, might need adjustment */
+    white-space: nowrap; /* Force on single line for full visibility */
     letter-spacing: 0.02em;
     font-weight: 300;
     transition: font-size 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
