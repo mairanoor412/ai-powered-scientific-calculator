@@ -69,7 +69,7 @@ body {
 }
 
 .display .result {
-    font-size: clamp(2.0em, 7vh, 3.0em); /* Professional and readable font size */
+    font-size: clamp(1.5em, 5vh, 2.5em); /* Reduced for better visibility of long numbers */
     color: #FFFFFF;
     white-space: nowrap;
     overflow: hidden;
@@ -199,7 +199,7 @@ button[data-action="delete"]:hover {
         font-size: clamp(0.6em, 2vh, 0.9em); /* Further reduced for small screens */
     }
     .display .result {
-        font-size: clamp(1.8em, 6vh, 2.8em); /* Further reduced for small screens */
+        font-size: clamp(1.2em, 4vh, 2.2em); /* Further reduced for small screens */
     }
     /* Specific adjustments for very short screens (e.g., small phones in landscape/portrait) */
     @media (max-height: 600px) {
@@ -216,7 +216,7 @@ button[data-action="delete"]:hover {
             font-size: clamp(0.4em, 1.2vh, 0.7em);
         }
         .calculator.scientific-mode .display .result {
-            font-size: clamp(1.0em, 3vh, 1.5em);
+            font-size: clamp(0.8em, 2.5vh, 1.2em); /* Further reduced for very short screens */
         }
     }
 }
