@@ -71,9 +71,8 @@ body {
 .display .result {
     font-size: clamp(1.5em, 5vh, 2.5em); /* Reduced for better visibility of long numbers */
     color: #FFFFFF;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal; /* Allow numbers to wrap to multiple lines */
+    overflow: hidden; /* Keep overflow hidden for now, might need adjustment */
     letter-spacing: 0.02em;
     font-weight: 300;
     transition: font-size 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
